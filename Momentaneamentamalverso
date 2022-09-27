@@ -1,0 +1,70 @@
+package unidad1;
+
+import java.util.Scanner;
+import java.util.Stack;
+
+public class persona {
+
+    public static void main(String[] args) {
+        System.out.println("");
+        Scanner momento = new Scanner(System.in);
+        //Depurar ña expresion algebraica
+
+        String expr = depurar(momento.nextLine());
+        //Se hace la asignación al objeto expr de lo que traemos en el arreglo arrayInfix
+        String[] arrayInfix = expr.split("");
+
+        //Declaración de las pilas
+        Stack<String> PE = new Stack<String>(); //Pila de entrada
+        Stack<String> PT = new Stack<String>(); //Pila temporal
+        Stack<String> PS = new Stack<String>(); //Pila de salida
+        //SE agrega eñ arregla a la pila de entrada (E)
+        for (int i = arrayInfix.length - 1; i >= 0; i--) {
+            //Apila a los elementos de la pila
+            PE.push(arrayInfix);
+        }
+        //Se hace uso de la excepcion para definir el tipo de expresion 
+        //Desarrollo de los algoritmos infijo a postfijo
+        try {
+            //Empty nos dice si la pila está vacía
+            while (!PE.isEmpty()) {
+                switch (pref(PE.peek())) {
+                    case 1:
+                        //Se llama el metodo apilar (push) hacia la pila 
+                        PT.push(PE.pop());
+                        break;
+                    case 2:
+                        while (!PT.peek().equals("(")) {
+                            
+                        }
+                         
+                            ){
+                            PS.push(PT.pop());
+                        }
+                        PT.pop();
+                        PE.pop();
+                        break;
+                        PS.push(PE.pop());
+                    case 3:
+                        break;
+                    case 4:
+                        while (pref(PT.peek()) >= pref(PE.peek())) {
+                            //Se llama el metodo POP()desde la pila S(salida)
+                            PS.push(PT.pop());
+                        }
+                        PT.push(PE.pop());
+                        break;
+                    default:
+                        PS.push(PE.pop());
+                }
+            }
+            //Eliminación de impurezas en las expresiones algebraicas
+            String infix = expr.replace("", "");
+            String postfix = PS.toString().replaceAll("[//]//[,]","");
+
+        } catch (Exception e) {
+
+        }
+    }
+
+}
